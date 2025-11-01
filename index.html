@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">SRMS</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="add-student">Add Student</a></li>
+                <li><a href="#" class="nav-link" data-page="view-records">View Records</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page Section -->
+    <section id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1>Student Records Management System</h1>
+                <p>A simple and efficient way to manage student information</p>
+                <p class="subtitle">Welcome to our web-based student record management portal. This system allows you to easily add, view, edit and manage student records.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="navigateToPage('add-student')">Add New Student</button>
+                    <button class="btn btn-secondary" onclick="navigateToPage('view-records')">View All Records</button>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📝 Add Students</h3>
+                        <p>Easily add new student records with complete information</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>👀 View Records</h3>
+                        <p>View all student records in a organized table format</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✏️ Edit &amp; Update</h3>
+                        <p>Update existing student information anytime</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🗑️ Delete Records</h3>
+                        <p>Remove student records when no longer needed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Student Page Section -->
+    <section id="add-student" class="page">
+        <div class="container">
+            <h1>Add New Student</h1>
+            <p class="page-description">Fill in all the details to add a new student record</p>
+            
+            <div class="form-container">
+                <form id="studentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentId">Student ID *</label>
+                            <input type="text" id="studentId" name="studentId" placeholder="Enter student ID" required>
+                            <span class="error-message" id="studentIdError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="studentName">Student Name *</label>
+                            <input type="text" id="studentName" name="studentName" placeholder="Enter full name" required>
+                            <span class="error-message" id="studentNameError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentEmail">Email Address *</label>
+                            <input type="email" id="studentEmail" name="studentEmail" placeholder="example@email.com" required>
+                            <span class="error-message" id="studentEmailError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="studentPhone">Phone Number *</label>
+                            <input type="text" id="studentPhone" name="studentPhone" placeholder="10 digit phone number" required>
+                            <span class="error-message" id="studentPhoneError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentCourse">Course *</label>
+                            <select id="studentCourse" name="studentCourse" required>
+                                <option value="">Select Course</option>
+                                <option value="BCA">BCA</option>
+                                <option value="B.Tech">B.Tech</option>
+                                <option value="BSc">BSc</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span class="error-message" id="studentCourseError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="studentSemester">Semester *</label>
+                            <input type="number" id="studentSemester" name="studentSemester" placeholder="1-8" min="1" max="8" required>
+                            <span class="error-message" id="studentSemesterError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentGpa">GPA *</label>
+                            <input type="number" id="studentGpa" name="studentGpa" placeholder="0.0 - 4.0" step="0.1" min="0" max="4" required>
+                            <span class="error-message" id="studentGpaError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Add Student</button>
+                        <button type="reset" class="btn btn-secondary">Reset Form</button>
+                    </div>
+                </form>
+                
+                <div id="successMessage" class="success-message" style="display: none;">
+                    Student record added successfully! <a href="#" onclick="navigateToPage('view-records'); return false;">View Records</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- View Records Page Section -->
+    <section id="view-records" class="page">
+        <div class="container">
+            <h1>Student Records</h1>
+            <p class="page-description">View, search, edit and delete student records</p>
+            
+            <div class="table-controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name or ID...">
+                </div>
+                <button class="btn btn-primary" onclick="navigateToPage('add-student')">+ Add New Student</button>
+            </div>
+
+            <div class="table-container">
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('id')">Student ID ↕</th>
+                            <th onclick="sortTable('name')">Name ↕</th>
+                            <th onclick="sortTable('email')">Email</th>
+                            <th onclick="sortTable('phone')">Phone</th>
+                            <th onclick="sortTable('course')">Course ↕</th>
+                            <th onclick="sortTable('semester')">Semester ↕</th>
+                            <th onclick="sortTable('gpa')">GPA ↕</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Student records will be inserted here -->
+                    </tbody>
+                </table>
+                <div id="noRecordsMessage" class="no-records" style="display: none;">
+                    No records found. <a href="#" onclick="navigateToPage('add-student'); return false;">Add a new student</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page Section -->
+    <section id="about" class="page">
+        <div class="container">
+            <h1>About This Project</h1>
+            
+            <div class="about-content">
+                <div class="about-section">
+                    <h2>Project Overview</h2>
+                    <p><strong>Project Title:</strong> Student Records Management System</p>
+                    <p><strong>Subject:</strong> Web Development Mini Project</p>
+                    <p><strong>Date:</strong> November 2025</p>
+                    <p>This is a frontend web application designed to manage student information efficiently. The system allows users to perform CRUD operations (Create, Read, Update, Delete) on student records without requiring any backend server or database.</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Features</h2>
+                    <ul class="features-list">
+                        <li>✓ Add new student records with complete information</li>
+                        <li>✓ View all student records in a table format</li>
+                        <li>✓ Search and filter student records</li>
+                        <li>✓ Sort records by different columns</li>
+                        <li>✓ Edit existing student information</li>
+                        <li>✓ Delete student records with confirmation</li>
+                        <li>✓ Form validation for data integrity</li>
+                        <li>✓ Responsive design for mobile and desktop</li>
+                        <li>✓ Data persistence during the session</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h2>Technologies Used</h2>
+                    <ul class="tech-list">
+                        <li>HTML5 - Structure and content</li>
+                        <li>CSS3 - Styling and layout</li>
+                        <li>JavaScript - Functionality and interactivity</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h2>Developer Information</h2>
+                    <p><strong>Developed by:</strong> [Student Name]</p>
+                    <p><strong>Course:</strong> Bachelor of Computer Applications (BCA)</p>
+                    <p><strong>Institution:</strong> [College Name]</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Acknowledgments</h2>
+                    <p>I would like to thank my professors and mentors for their guidance and support in completing this project. Special thanks to my Web Development instructor for providing valuable insights throughout the development process.</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Contact &amp; Feedback</h2>
+                    <p>For any queries or feedback regarding this project, please feel free to reach out:</p>
+                    <p><strong>Email:</strong> student@example.com</p>
+                    <p><strong>GitHub:</strong> github.com/studentname</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Student Records Management System. Developed by BCA Student for Mini Project.</p>
+        </div>
+    </footer>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content delete-modal">
+            <div class="modal-header">
+                <h2>Confirm Delete</h2>
+                <span class="close" onclick="closeDeleteModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p class="delete-warning">⚠️ Are you sure you want to delete this student record?</p>
+                <p class="delete-info">This action cannot be undone.</p>
+                <div id="studentToDelete" class="student-details"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Student Record</h2>
+                <span class="close" onclick="closeEditModal()">&times;</span>
+            </div>
+            <form id="editForm">
+                <input type="hidden" id="editIndex">
+                
+                <div class="form-group">
+                    <label for="editStudentId">Student ID *</label>
+                    <input type="text" id="editStudentId" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStudentName">Student Name *</label>
+                    <input type="text" id="editStudentName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStudentEmail">Email Address *</label>
+                    <input type="email" id="editStudentEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStudentPhone">Phone Number *</label>
+                    <input type="text" id="editStudentPhone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStudentCourse">Course *</label>
+                    <select id="editStudentCourse" required>
+                        <option value="BCA">BCA</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="BSc">BSc</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStudentSemester">Semester *</label>
+                    <input type="number" id="editStudentSemester" min="1" max="8" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStudentGpa">GPA *</label>
+                    <input type="number" id="editStudentGpa" step="0.1" min="0" max="4" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Update Student</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
